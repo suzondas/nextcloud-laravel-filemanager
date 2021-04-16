@@ -15,8 +15,8 @@ technology.
 <pre>'webdav' => [
                  'driver' => 'webdav',
                  'baseUri' => 'http://v2202104146053149958.hotsrv.de', //replace by yours baseUri
-                 'userName' => 'admin', //replace by your user name
-                 'password' => 'ficu3Hochoong7Mu8baelai4', //replace by your password
+                 'userName' => '', //replace by your user name
+                 'password' => '', //replace by your password
                  'pathPrefix' => 'nextcloud/remote.php/webdav', //keep it intake
              ],
 </pre>
