@@ -34,7 +34,7 @@ return [
             'baseUri' => 'http://v2202104146053149958.hotsrv.de',
             'userName' => 'admin',
             'password' => 'ficu3Hochoong7Mu8baelai4',
-            'pathPrefix' => 'nextcloud/remote.php/webdav', // optional
+            'pathPrefix' => 'nextcloud/remote.php/webdav',
         ],
 
         'local' => [
