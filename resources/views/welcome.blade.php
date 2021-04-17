@@ -9,11 +9,29 @@
 
     <script type="text/javascript" src=" {{asset('js/jquery-1.10.2.min.js')}}"></script>
     <script type="text/javascript" src=" {{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+
+    <style>
+        .btn {
+            border: 1px solid dodgerblue;
+        }
+        @media (min-width: 768px) {
+            .navbar-nav {
+                width: 100%;
+                text-align: center;
+            }
+            .navbar-nav > li {
+                float: none;
+                display: inline-block;
+            }
+            .navbar-nav > li.navbar-right {
+                float: right !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-
     <div class="page-header">
         <h1>File Manager
             <small>Nextcloud WebDav</small>
@@ -26,28 +44,29 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="row">
-                        <ul class="collapse navbar-collapse nav navbar-nav navbar-left" id="options">
-                            <li><a href="/"><i class="fa fa-home fa-lg">Home</i> </a></li>
-                            <li>
+                    <div class="nav">
+                        <ul class="nav navbar-nav  collapse navbar-collapse " id="options">
+                            <li class="navbar-left"><a href="/"><i class="fa fa-home fa-lg">Home</i> </a></li>
+                            <li class="navbar-right">
                                 <a href="" data-toggle="modal"
-                                        data-target="#exampleModal">
-                                   <i class="fa fa-file fa-lg"></i> Add a File</a>
+                                   data-target="#addFile">
+                                    <i class="fa fa-file fa-lg"></i> Add a File</a>
                             </li>
-                            <li style="padding-left: 5px;">
+                            <li class="navbar-right" style="padding-left: 5px;">
                                 <a href="" data-toggle="modal"
-                                   data-target="#exampleModal2">
+                                   data-target="#addFolder">
                                     <i class="fa fa-folder fa-lg"></i> Add a Folder</a>
                             </li>
                         </ul>
                     </div>
                     <div class="bg-info" style="padding:10px;">
-                        <b> Current Path:</b> /{{$currPath}}
+                        <b> Current Path:</b>
+                        <a href="/" ><i class="fa fa-home"></i>/</a>
+                        <?php echo implode(' / ', $dirPath); ?>
                     </div>
-                    <div class="panel-body pb-filemng-panel-body">
-
+                    <div class="panel-body">
                         <div class="row">
-                            <div class="col-sm-12 col-md-12 pb-filemng-template-body">
+                            <div class="col-md-12">
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                     <tr class="bg-primary">
@@ -72,7 +91,7 @@
                                                                 class="fa fa-expand fa-lg"></i> Open </a>
                                                 @elseif($item["type"] === 'file')
                                                     <a class="btn"
-                                                       href="http://v2202104146053149958.hotsrv.de/nextcloud/remote.php/webdav/{{$item["path"]}}"
+                                                       href='getFile?path={{$item["path"]}}&filename={{$item["basename"]}}'
                                                        target="_blank"><i class="fa fa-eye fa-lg"></i> View</a>
                                                 @endif
                                                 <a class="btn"
@@ -81,6 +100,11 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @if(sizeof($response) === 0)
+                                        <tr>
+                                            <td colspan="2">No Files added here</td>
+                                        </tr>
+                                    @endif
                                     </tbody>
                                 </table>
 
@@ -91,10 +115,9 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="addFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -117,7 +140,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="addFolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

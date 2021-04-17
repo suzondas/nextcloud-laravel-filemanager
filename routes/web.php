@@ -17,4 +17,5 @@ Route::get('/', [\App\Http\Controllers\webDavController::class, 'index'])->name(
 Route::get('/delete', [\App\Http\Controllers\webDavController::class, 'delete'])->name('delete');
 Route::post('/newFile', [\App\Http\Controllers\webDavController::class, 'newFile'])->name('newFile');
 Route::post('/newFolder', [\App\Http\Controllers\webDavController::class, 'newFolder'])->name('newFolder');
+Route::get('/getFile', [\App\Http\Controllers\webDavController::class, 'getFile'])->name('getFile');
 
